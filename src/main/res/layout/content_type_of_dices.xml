@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".TypeOfDicesActivity"
+    tools:showIn="@layout/activity_type_of_dices">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/mechButton"
+            style="@style/MenuButton"
+            android:layout_marginTop="150dp"
+            android:text="@string/mechatronic_dices" />
+
+        <Button
+            android:id="@+id/normButton"
+            style="@style/MenuButton"
+            android:layout_marginTop="16dp"
+            android:text="@string/normal_dices" />
+
+        <Button
+            android:id="@+id/virtButton"
+            style="@style/MenuButton"
+            android:layout_marginTop="16dp"
+            android:text="@string/virtual_dices" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

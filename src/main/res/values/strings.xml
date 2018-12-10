@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">MDice</string>
+    <string name="action_settings">Settings</string>
+    <string name="mechatronic_dices">Mechatronic Dices</string>
+    <string name="load_results">Load Results</string>
+    <string name="normal_dices">Normal Dices</string>
+    <string name="virtual_dices">Virtual Dices</string>
+    <string name="title_activity_ngame_options">Game Options</string>
+    <string name="title_activity_mgame_options">Game Options</string>
+    <string name="name_of_game">Name of Game:</string>
+    <string name="number_of_dices_text">Number of Dices:</string>
+    <string name="plus">+</string>
+    <string name="minus">–</string>
+    <string name="numberOfDices">2</string>
+    <string name="title_activity_ngame">Select Results</string>
+    <string name="start">Start</string>
+    <string name="name">Name</string>
+    <string name="zeroDices">0</string>
+    <string name="shPFileName">MDiceSharedPreferencesFile</string>
+    <string name="choose_game">Choose game:</string>
+    <string name="addGame">Add Game</string>
+    <string name="title_activity_load_results">LoadResultsActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_Last">Last</string>
+    <string name="title_Month">Month</string>
+    <string name="title_All">All</string>
+    <string name="title_activity_type_of_dices">Type Of Dices</string>
+    <string name="play_game">Play Game</string>
+    <string name="title_activity_vgame_options">Game Options</string>
+    <string name="title_activity_vgame">Select Results</string>
+    <string name="roll">Roll!</string>
+    <string name="last_result">Last Result</string>
+
+</resources>

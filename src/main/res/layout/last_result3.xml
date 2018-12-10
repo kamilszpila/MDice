@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/lastResultTV"
+        style="@style/LastResultTV"/>
+
+    <ImageView
+        android:id="@+id/diceImageS1"
+        style="@style/DiceImageSmall"
+        android:src="@drawable/dice_1" />
+
+    <ImageView
+        android:id="@+id/diceImageS2"
+        style="@style/DiceImageSmall"
+        android:src="@drawable/dice_2" />
+
+    <ImageView
+        android:id="@+id/diceImageS3"
+        style="@style/DiceImageSmall"
+        android:src="@drawable/dice_3" />
+
+</LinearLayout>
