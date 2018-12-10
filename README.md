@@ -3,6 +3,8 @@
 
 [ENG] This app is a part of project "Mechatronic Dices" at Mechatronic Design (9th semester of studies, Mechatrotronic Engineering, AGH UST)
 
+Description #1 contains screenshots from application
+
 #DONE
 -Saving Data from normal dices
 -Saving data from virtual dices
