@@ -8,6 +8,7 @@
 -Saving data from virtual dices
 
 #TODO
+-Icon
 -Loading results
 -Presenting data
 -Saving data from mechatronic dices
