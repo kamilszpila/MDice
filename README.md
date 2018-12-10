@@ -4,10 +4,10 @@
 [ENG] This app is a part of project "Mechatronic Dices" at Mechatronic Design (9th semester of studies, Mechatrotronic Engineering, AGH UST)
 
 #DONE
-Saving Data from normal dices
-Saving data from virtual dices
+-Saving Data from normal dices
+-Saving data from virtual dices
 
 #TODO
-Loading results
-Presenting data
-Saving data from mechatronic dices
+-Loading results
+-Presenting data
+-Saving data from mechatronic dices
