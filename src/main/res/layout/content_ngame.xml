@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".NGameActivity"
+    tools:showIn="@layout/activity_ngame">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:stretchColumns="*" >
+
+            <TableRow android:layout_marginBottom="15dp">
+
+                <ImageButton
+                    android:id="@+id/diceButton1"
+                    style="@style/DiceButton"
+                    android:src="@drawable/dice_1" />
+
+                <ImageButton
+                    android:id="@+id/diceButton2"
+                    style="@style/DiceButton"
+                    android:src="@drawable/dice_2" />
+
+                <ImageButton
+                    android:id="@+id/diceButton3"
+                    style="@style/DiceButton"
+                    android:src="@drawable/dice_3" />
+
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:id="@+id/diceTV1"
+                    style="@style/DiceTV" />
+
+                <TextView
+                    android:id="@+id/diceTV2"
+                    style="@style/DiceTV" />
+
+                <TextView
+                    android:id="@+id/diceTV3"
+                    style="@style/DiceTV" />
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="15dp">
+
+                <ImageButton
+                    android:id="@+id/diceButton4"
+                    style="@style/DiceButton"
+                    android:src="@drawable/dice_4" />
+
+                <ImageButton
+                    android:id="@+id/diceButton5"
+                    style="@style/DiceButton"
+                    android:src="@drawable/dice_5" />
+
+                <ImageButton
+                    android:id="@+id/diceButton6"
+                    style="@style/DiceButton"
+                    android:src="@drawable/dice_6" />
+
+            </TableRow>
+
+            <TableRow >
+
+                <TextView
+                    android:id="@+id/diceTV4"
+                    style="@style/DiceTV" />
+
+                <TextView
+                    android:id="@+id/diceTV5"
+                    style="@style/DiceTV" />
+
+                <TextView
+                    android:id="@+id/diceTV6"
+                    style="@style/DiceTV" />
+
+            </TableRow>
+
+
+        </TableLayout>
+
+        <LinearLayout
+            android:id="@+id/lastResultFrame"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/discardButton"
+                style="@style/AddDiscardButton"
+                android:src="@drawable/delete"
+                android:background="@android:color/transparent" />
+
+            <ImageButton
+                android:id="@+id/addButton"
+                style="@style/AddDiscardButton"
+                android:src="@drawable/check"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

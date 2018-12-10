@@ -1,0 +1,44 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/VirtualDicesXml"
+    android:shrinkColumns="*">
+
+    <TableRow>
+
+        <ImageView
+            android:id="@+id/diceImage1"
+            style="@style/DiceImage"
+            android:src="@drawable/dice_1" />
+
+        <ImageView
+            android:id="@+id/diceImage2"
+            style="@style/DiceImage"
+            android:layout_column="3"
+            android:src="@drawable/dice_2" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:id="@+id/diceImage3"
+            style="@style/DiceImage"
+            android:layout_column="2"
+            android:src="@drawable/dice_3" />
+    </TableRow>
+
+    <TableRow>
+
+        <ImageView
+            android:id="@+id/diceImage4"
+            style="@style/DiceImage"
+            android:src="@drawable/dice_4" />
+
+        <ImageView
+            android:id="@+id/diceImage5"
+            style="@style/DiceImage"
+            android:layout_column="3"
+            android:src="@drawable/dice_5" />
+
+    </TableRow>
+
+</TableLayout>
