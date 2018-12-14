@@ -83,12 +83,12 @@ public class VGameOptionsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void click(View view){
+    public void click(View view) {
 
         numberOfDices = Integer.parseInt(numberOfDicesTV.getText().toString());
         nameOfGame = nameOfGameET.getText().toString();
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.plusButton:
                 if (numberOfDices < 6) {
                     numberOfDices++;
@@ -114,11 +114,14 @@ public class VGameOptionsActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.name_of_game), nameOfGame.toUpperCase());
                 editor.putInt(getString(R.string.number_of_dices_text), numberOfDices);
+                int gameID = sharedPreferences.getInt(nameOfGame + "V", 0);
+                gameID++;
+                editor.putInt(nameOfGame + "V", gameID);
                 editor.commit();
                 myDb = MainActivity.myDb;
-                myDb.createTable(nameOfGame, numberOfDices,true);
+                myDb.createTable(nameOfGame, numberOfDices, true);
 
-                Intent intent = new Intent(VGameOptionsActivity.this,VGameActivity.class);
+                Intent intent = new Intent(VGameOptionsActivity.this, VGameActivity.class);
                 startActivity(intent);
                 break;
         }

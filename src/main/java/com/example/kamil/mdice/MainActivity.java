@@ -9,8 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
         loadButton.setEnabled(false);
 
 
-        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
         } else {
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISSION_WRITE_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_STORAGE);
         }
 
         myDb = new DataBaseHelper(this);
@@ -47,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     public void click(View view) {
 
         Intent intent;
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.playButton:
-                intent = new Intent(MainActivity.this,TypeOfDicesActivity.class);
+                intent = new Intent(MainActivity.this, TypeOfDicesActivity.class);
                 startActivity(intent);
                 break;
             case R.id.loadButton:

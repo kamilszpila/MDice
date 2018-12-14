@@ -30,38 +30,38 @@ public class VGameActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shPFileName), MODE_PRIVATE);
         numberOfAllDices = sharedPreferences.getInt(getString(R.string.number_of_dices_text), 2);
-        nameOfGame = sharedPreferences.getString(getString(R.string.name_of_game),"Catan");
+        nameOfGame = sharedPreferences.getString(getString(R.string.name_of_game), "CATAN");
 
         VirtualDicesFragment fragment = new VirtualDicesFragment(numberOfAllDices);
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager .beginTransaction();
-        transaction.add(R.id.virtualDicesFrame,fragment);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.virtualDicesFrame, fragment);
         transaction.commit();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void click(View view){
+    public void click(View view) {
 
         ids = new int[]{R.id.diceImage1, R.id.diceImage2, R.id.diceImage3, R.id.diceImage4, R.id.diceImage5, R.id.diceImage6};
         drawables = new int[]{R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6};
         diceImages = new ImageView[numberOfAllDices];
 
-        for(int i=0; i<numberOfAllDices; i++){
+        for (int i = 0; i < numberOfAllDices; i++) {
             diceImages[i] = findViewById(ids[i]);
 
         }
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.rollButton:
-                    myDb = MainActivity.myDb;
-                    int[] values = roll(numberOfAllDices);
-                    myDb.insertData(nameOfGame,values,true);
-                    for(int i=0; i<diceImages.length; i++){
-                        diceImages[i].setImageResource(drawables[(values[i]-1)]);
-                    }
+                myDb = MainActivity.myDb;
+                int[] values = roll(numberOfAllDices);
+                myDb.insertData(nameOfGame, values, true);
+                for (int i = 0; i < diceImages.length; i++) {
+                    diceImages[i].setImageResource(drawables[(values[i] - 1)]);
+                }
 
-                    Toast.makeText(this, "Result saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Result saved", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -72,8 +72,8 @@ public class VGameActivity extends AppCompatActivity {
 
         int[] values = new int[numberOfAllDices];
         random = new Random();
-        for(int i=0; i<numberOfAllDices; i++){
-            values[i] = random.nextInt(6)+1;
+        for (int i = 0; i < numberOfAllDices; i++) {
+            values[i] = random.nextInt(6) + 1;
         }
         return values;
 

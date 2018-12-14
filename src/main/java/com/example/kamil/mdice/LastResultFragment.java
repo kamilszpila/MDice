@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class LastResultFragment extends Fragment{
+public class LastResultFragment extends Fragment {
 
     int numberOfDices;
 
@@ -27,7 +27,7 @@ public class LastResultFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = null;
-        switch (numberOfDices){
+        switch (numberOfDices) {
             case 1:
                 view = inflater.inflate(R.layout.last_result1, container, false);
                 break;

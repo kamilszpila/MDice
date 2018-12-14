@@ -29,19 +29,19 @@ public class TypeOfDicesActivity extends AppCompatActivity {
     }
 
 
-    public void click(View view){
+    public void click(View view) {
         Intent intent;
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.mechButton:
-                intent = new Intent(TypeOfDicesActivity.this,MGameOptionsActivity.class);
+                intent = new Intent(TypeOfDicesActivity.this, MGameOptionsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.normButton:
-                intent = new Intent(TypeOfDicesActivity.this,NGameOptionsActivity.class);
+                intent = new Intent(TypeOfDicesActivity.this, NGameOptionsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.virtButton:
-                intent = new Intent(TypeOfDicesActivity.this,VGameOptionsActivity.class);
+                intent = new Intent(TypeOfDicesActivity.this, VGameOptionsActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -84,7 +84,7 @@ public class NGameOptionsActivity extends AppCompatActivity {
     public void click(View view) {
 
         numberOfDices = Integer.parseInt(numberOfDicesTV.getText().toString());
-        nameOfGame = nameOfGameET.getText().toString();
+        nameOfGame = nameOfGameET.getText().toString().toUpperCase();
 
         switch (view.getId()) {
             case R.id.plusButton:
@@ -110,11 +110,14 @@ public class NGameOptionsActivity extends AppCompatActivity {
             case R.id.startButton:
                 SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shPFileName), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(getString(R.string.name_of_game), nameOfGame.toUpperCase());
+                editor.putString(getString(R.string.name_of_game), nameOfGame);
                 editor.putInt(getString(R.string.number_of_dices_text), numberOfDices);
+                int gameID = sharedPreferences.getInt(nameOfGame, 0);
+                gameID++;
+                editor.putInt(nameOfGame, gameID);
                 editor.commit();
                 myDb = MainActivity.myDb;
-                myDb.createTable(nameOfGame, numberOfDices,false);
+                myDb.createTable(nameOfGame, numberOfDices, false);
 
                 Intent intent = new Intent(NGameOptionsActivity.this, NGameActivity.class);
                 startActivity(intent);
