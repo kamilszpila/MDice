@@ -26,25 +26,25 @@ public class VirtualDicesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = null;
-        switch (numberOfDices){
+        switch (numberOfDices) {
             case 1:
                 view = inflater.inflate(R.layout.virtual_dices1, container, false);
                 break;
             case 2:
                 view = inflater.inflate(R.layout.virtual_dices2, container, false);
-            break;
+                break;
             case 3:
                 view = inflater.inflate(R.layout.virtual_dices3, container, false);
-            break;
+                break;
             case 4:
                 view = inflater.inflate(R.layout.virtual_dices4, container, false);
-            break;
+                break;
             case 5:
                 view = inflater.inflate(R.layout.virtual_dices5, container, false);
-            break;
+                break;
             case 6:
                 view = inflater.inflate(R.layout.virtual_dices6, container, false);
-            break;
+                break;
 
         }
         return view;
