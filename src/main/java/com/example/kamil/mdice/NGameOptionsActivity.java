@@ -38,20 +38,19 @@ public class NGameOptionsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         myDb = MainActivity.myDb;
-        myDb.createNameTable();
-        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
 
-        names = myDb.getAllData("MDiceGames", "NAME");
+        names = myDb.getAllData("MDiceGames", "NAME", "NAME");
         names.add("Add Game");
         adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, names);
         spinner.setAdapter(adapter);
 
-        addGame = (Button) findViewById(R.id.addGameButton);
-        plusButton = (Button) findViewById(R.id.plusButton);
-        minusButton = (Button) findViewById(R.id.minusButton);
+        addGame = findViewById(R.id.addGameButton);
+        plusButton = findViewById(R.id.plusButton);
+        minusButton = findViewById(R.id.minusButton);
 
-        nameOfGameET = (EditText) findViewById(R.id.nameOfGameET);
-        numberOfDicesTV = (TextView) findViewById(R.id.numberDicesTV);
+        nameOfGameET = findViewById(R.id.nameOfGameET);
+        numberOfDicesTV = findViewById(R.id.numberDicesTV);
 
 
         setChooseOptions(new View[]{addGame, plusButton, minusButton, nameOfGameET}, new View[]{plusButton, minusButton, addGame});
@@ -65,7 +64,7 @@ public class NGameOptionsActivity extends AppCompatActivity {
                     numberOfDicesTV.setText(String.valueOf(2));
                 } else {
                     setChooseOptions(new View[]{addGame, plusButton, minusButton, nameOfGameET}, new View[]{plusButton, minusButton, addGame});
-                    ArrayList<String> numbers = myDb.getAllData("MDiceGames", "NUMBER");
+                    ArrayList<String> numbers = myDb.getAllData("MDiceGames", "NUMBER", "NAME");
                     nameOfGame = names.get(position);
                     numberOfDices = Integer.parseInt(numbers.get(position));
                     nameOfGameET.setText(nameOfGame);
@@ -102,21 +101,21 @@ public class NGameOptionsActivity extends AppCompatActivity {
             case R.id.addGameButton:
                 myDb = MainActivity.myDb;
                 myDb.insertGame(nameOfGame, numberOfDices);
-                names = myDb.getAllData("MDiceGames", "NAME");
+                names = myDb.getAllData("MDiceGames", "NAME", "NAME");
                 names.add("Add Game");
                 adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, names);
                 spinner.setAdapter(adapter);
                 break;
             case R.id.startButton:
+                myDb = MainActivity.myDb;
                 SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shPFileName), MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.name_of_game), nameOfGame);
                 editor.putInt(getString(R.string.number_of_dices_text), numberOfDices);
-                int gameID = sharedPreferences.getInt(nameOfGame, 0);
+                int gameID = myDb.getLastGameID(nameOfGame, false);
                 gameID++;
                 editor.putInt(nameOfGame, gameID);
                 editor.commit();
-                myDb = MainActivity.myDb;
                 myDb.createTable(nameOfGame, numberOfDices, false);
 
                 Intent intent = new Intent(NGameOptionsActivity.this, NGameActivity.class);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,9 @@ public class NGameActivity extends AppCompatActivity {
     FragmentTransaction transaction;
     LastResultFragment fragment;
 
+    TextView numberDice1, numberDice2, numberDice3, numberDice4, numberDice5, numberDice6;
+    TextView[] numberDice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +35,7 @@ public class NGameActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shPFileName), MODE_PRIVATE);
         numberOfAllDices = sharedPreferences.getInt(getString(R.string.number_of_dices_text), 2);
-        nameOfGame = sharedPreferences.getString(getString(R.string.name_of_game), "Catan");
+        nameOfGame = sharedPreferences.getString(getString(R.string.name_of_game), "CATAN");
 
         fragment = new LastResultFragment(numberOfAllDices);
         transaction = getSupportFragmentManager().beginTransaction();
@@ -39,6 +43,9 @@ public class NGameActivity extends AppCompatActivity {
         transaction.hide(fragment);
         transaction.commit();
 
+        ids = new int[]{R.id.diceImageS1, R.id.diceImageS2, R.id.diceImageS3, R.id.diceImageS4, R.id.diceImageS5, R.id.diceImageS6};
+        drawables = new int[]{R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6};
+        diceImagesS = new ImageView[numberOfAllDices];
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -46,24 +53,19 @@ public class NGameActivity extends AppCompatActivity {
 
     public void click(View view) {
 
-        ids = new int[]{R.id.diceImageS1, R.id.diceImageS2, R.id.diceImageS3, R.id.diceImageS4, R.id.diceImageS5, R.id.diceImageS6};
-        drawables = new int[]{R.drawable.dice_1, R.drawable.dice_2, R.drawable.dice_3, R.drawable.dice_4, R.drawable.dice_5, R.drawable.dice_6};
-        diceImagesS = new ImageView[numberOfAllDices];
-
         for (int i = 0; i < numberOfAllDices; i++) {
             diceImagesS[i] = findViewById(ids[i]);
 
         }
 
-        final TextView numberDice1 = (TextView) findViewById(R.id.diceTV1);
-        final TextView numberDice2 = (TextView) findViewById(R.id.diceTV2);
-        final TextView numberDice3 = (TextView) findViewById(R.id.diceTV3);
-        final TextView numberDice4 = (TextView) findViewById(R.id.diceTV4);
-        final TextView numberDice5 = (TextView) findViewById(R.id.diceTV5);
-        final TextView numberDice6 = (TextView) findViewById(R.id.diceTV6);
+        numberDice1 = findViewById(R.id.diceTV1);
+        numberDice2 = findViewById(R.id.diceTV2);
+        numberDice3 = findViewById(R.id.diceTV3);
+        numberDice4 = findViewById(R.id.diceTV4);
+        numberDice5 = findViewById(R.id.diceTV5);
+        numberDice6 = findViewById(R.id.diceTV6);
 
-        final TextView[] numberDice = new TextView[]{numberDice1, numberDice2, numberDice3, numberDice4, numberDice5, numberDice6};
-
+        numberDice = new TextView[]{numberDice1, numberDice2, numberDice3, numberDice4, numberDice5, numberDice6};
 
         switch (view.getId()) {
             case R.id.diceButton1:
@@ -120,12 +122,15 @@ public class NGameActivity extends AppCompatActivity {
                     transaction.show(fragment);
                     transaction.commit();
 
-
                     numberOfChosenDices = 0;
 
-                    Toast.makeText(this, "Result saved", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(this, "Result saved", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 0);
+                    toast.show();
                 } else {
-                    Toast.makeText(this, "Select all dices", Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(this, "Select all dices", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 0);
+                    toast.show();
                 }
                 break;
 
@@ -143,7 +148,6 @@ public class NGameActivity extends AppCompatActivity {
 
     public int[] getValues(TextView[] numberDice) {
         int[] values = new int[numberOfAllDices];
-        System.out.println(values.length + "55555");
         int c = 0;
         for (int i = 0; i < numberDice.length; i++) {
             while (getValue(numberDice[i]) > 0) {

@@ -19,7 +19,9 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="android:textColorHint">@color/colorText</item>
+    </style>
 
     <style name="MenuButton">
         <item name="android:textSize">20sp</item>
@@ -77,6 +79,15 @@
         <item name="android:tint">@color/colorImageNonZero</item>
     </style>
 
+    <style name="DiceResultSmall">
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">30dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">@color/colorImageNonZero</item>
+    </style>
+
     <style name="AddDiscardButton">
         <item name="android:layout_width">90dp</item>
         <item name="android:layout_height">90dp</item>
@@ -105,8 +116,6 @@
     </style>
 
     <style name="Spinner">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorButtonText</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:popupBackground">@color/colorAccent</item>

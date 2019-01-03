@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/idTV"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:text="ID"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/DicesLinearLayout"
+            android:layout_width="216dp"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/idTV"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/diceResultS1"
+                style="@style/DiceResultSmall"
+                android:src="@drawable/dice_1_small" />
+
+            <ImageView
+                android:id="@+id/diceResultS2"
+                style="@style/DiceResultSmall"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/diceResultS3"
+                style="@style/DiceResultSmall"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/diceResultS4"
+                style="@style/DiceResultSmall"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/diceResultS5"
+                style="@style/DiceResultSmall"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/diceResultS6"
+                style="@style/DiceResultSmall"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/DicesLinearLayout"
+            android:gravity="center_vertical"
+            android:text="Date"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <!--<ImageView-->
+    <!--android:id="@+id/diceResultS1"-->
+    <!--style="@style/DiceImageSmall"-->
+    <!--android:layout_marginStart="10dp"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_toEndOf="@+id/idTV"-->
+    <!--android:src="@drawable/dice_1_small" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/diceResultS2"-->
+    <!--style="@style/DiceImageSmall"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_toEndOf="@+id/diceResultS1"-->
+    <!--android:src="@drawable/dice_2_small" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/diceResultS3"-->
+    <!--style="@style/DiceImageSmall"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_toEndOf="@+id/diceResultS2"-->
+    <!--android:src="@drawable/dice_3_small" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/diceResultS4"-->
+    <!--style="@style/DiceImageSmall"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_toEndOf="@+id/diceResultS3"-->
+    <!--android:src="@drawable/dice_4_small" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/diceResultS5"-->
+    <!--style="@style/DiceImageSmall"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_toEndOf="@+id/diceResultS4"-->
+    <!--android:src="@drawable/dice_5_small" />-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/diceResultS6"-->
+    <!--style="@style/DiceImageSmall"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_toEndOf="@+id/diceResultS5"-->
+    <!--android:src="@drawable/dice_6_small" />-->
+
+</android.support.constraint.ConstraintLayout>

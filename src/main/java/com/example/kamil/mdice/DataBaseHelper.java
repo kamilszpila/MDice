@@ -45,7 +45,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public boolean insertData(String tableName, int[] values, boolean isVirtual) {
+    public boolean insertData(String nameOfGame, int[] values, boolean isVirtual) {
         SQLiteDatabase db = this.getWritableDatabase();
         SharedPreferences sharedPreferences = appContext.getSharedPreferences(appContext.getString(R.string.shPFileName), MODE_PRIVATE);
 
@@ -61,15 +61,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         long inserted;
         int gameID;
 
-        if (isVirtual) {
-            gameID = sharedPreferences.getInt(tableName + "V", 0);
-            contentValues.put(COL_3, gameID);
-            inserted = db.insert(tableName + "V", null, contentValues);
-        } else {
-            gameID = sharedPreferences.getInt(tableName, 0);
-            contentValues.put(COL_3, gameID);
-            inserted = db.insert(tableName, null, contentValues);
-        }
+        String tableName = getTableName(nameOfGame, isVirtual);
+        gameID = sharedPreferences.getInt(tableName, 0);
+        contentValues.put(COL_3, gameID);
+        inserted = db.insert(tableName, null, contentValues);
 
         db.close();
 
@@ -81,15 +76,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void createTable(String tableName, int numberOfDices, boolean isVirtual) {
+    public void createTable(String nameOfGame, int numberOfDices, boolean isVirtual) {
         db = this.getWritableDatabase();
 
         String text;
-        if (isVirtual) {
-            text = "CREATE TABLE IF NOT EXISTS " + tableName.toUpperCase() + "V(ID INTEGER PRIMARY KEY AUTOINCREMENT";
-        } else {
-            text = "CREATE TABLE IF NOT EXISTS " + tableName.toUpperCase() + "(ID INTEGER PRIMARY KEY AUTOINCREMENT";
-        }
+        String tableName = getTableName(nameOfGame, isVirtual);
+        text = "CREATE TABLE IF NOT EXISTS " + tableName.toUpperCase() + "(ID INTEGER PRIMARY KEY AUTOINCREMENT";
 
         for (int i = 0; i < numberOfDices; i++) {
             text += "," + COL_O[i] + " INTEGER";
@@ -99,15 +91,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(text);
     }
 
-    public void createNameTable() {
-        db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(NAME, "CATAN");
-        contentValues.put(NUMBER, 2);
-        db.insert(TABLE_NAME, null, contentValues);
-        db.close();
-
-    }
 
     public boolean insertGame(String name, int number) {
         db = this.getWritableDatabase();
@@ -126,14 +109,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<String> getAllData(String tableName, String column) {
-        ArrayList<String> names = new ArrayList<String>();
+    public ArrayList<String> getAllData(String tableName, String column, String groupByColumn) {
         db = this.getReadableDatabase();
+        ArrayList<String> results = new ArrayList<>();
         try {
-            Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
+            Cursor cursor = db.rawQuery("SELECT " + column + " FROM " + tableName + " GROUP BY " + groupByColumn, null);
             if (cursor.getCount() > 0) {
-                while (cursor.moveToNext()) {
-                    names.add(cursor.getString(cursor.getColumnIndex(column)));
+                if (column.equals(NAME)) {
+                    while (cursor.moveToNext()) {
+                        results.add(cursor.getString(cursor.getColumnIndex(column)));
+                    }
+                } else if (column.equals(NUMBER)) {
+                    while (cursor.moveToNext()) {
+                        results.add(String.valueOf(cursor.getInt(cursor.getColumnIndex(column))));
+                    }
+                } else {
+                    while (cursor.moveToNext()) {
+                        results.add(String.valueOf(cursor.getInt(cursor.getColumnIndex(column))));
+                    }
                 }
             }
         } catch (Exception e) {
@@ -141,8 +134,175 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         } finally {
             db.close();
         }
-        return names;
+        return results;
+    }
+
+    public ArrayList<String> getDataFromGame(String nameOfGame, String column, String gameID, boolean isVirtual) {
+        db = this.getReadableDatabase();
+        ArrayList<String> results = new ArrayList<>();
+        String tableName = getTableName(nameOfGame, isVirtual);
+        try {
+            Cursor cursor;
+            if (gameID.equals("All")) {
+                cursor = db.rawQuery("SELECT " + column + " FROM " + tableName, null);
+            } else {
+                cursor = db.rawQuery("SELECT " + column + " FROM " + tableName + " WHERE " + COL_3 + " == " + gameID, null);
+            }
+            if (cursor.getCount() > 0) {
+                if (column.equals(COL_2)) {
+                    while (cursor.moveToNext()) {
+                        results.add(cursor.getString(cursor.getColumnIndex(column)));
+                    }
+                } else {
+                    while (cursor.moveToNext()) {
+                        results.add(String.valueOf(cursor.getInt(cursor.getColumnIndex(column))));
+
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return results;
+    }
+
+    public int getNumberOfDices(String gameName) {
+        db = this.getReadableDatabase();
+        int number = 1;
+        try {
+            Cursor cursor = db.rawQuery("SELECT " + NUMBER + " FROM " + TABLE_NAME + " WHERE " + NAME + " == " + "\"" + String.valueOf(gameName) + "\"", null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    number = cursor.getInt(cursor.getColumnIndex(NUMBER));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return number;
+    }
+
+    public ArrayList<String> getAllGameIDs(String nameOfGame, boolean isVirtual) {
+        db = this.getReadableDatabase();
+        ArrayList<String> gameIDs = new ArrayList<>();
+        String tableName = getTableName(nameOfGame, isVirtual);
+        try {
+            Cursor cursor = db.rawQuery("SELECT " + COL_3 + " FROM " + tableName + " GROUP BY " + COL_3, null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    gameIDs.add(String.valueOf(cursor.getInt(cursor.getColumnIndex(COL_3))));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return gameIDs;
+    }
+
+    public int getLastGameID(String nameOfGame, boolean isVirtual) {
+        db = this.getReadableDatabase();
+        int gameID = 0;
+        String tableName = getTableName(nameOfGame, isVirtual);
+
+        try {
+            Cursor cursor = db.rawQuery("SELECT " + COL_3 + " FROM " + tableName + " GROUP BY " + COL_3, null);
+            if (cursor.getCount() > 0) {
+                cursor.moveToLast();
+                gameID = cursor.getInt(cursor.getColumnIndex(COL_3));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return gameID;
+    }
+
+    public int[] countDices(String nameOfGame, String gameID, boolean isVirtual) {
+        int numberOfAllDices = getNumberOfDices(nameOfGame);
+        db = this.getReadableDatabase();
+        int countDices[] = new int[6];
+        Cursor cursor;
+        String tableName = getTableName(nameOfGame, isVirtual);
+
+        try {
+            for (int i = 0; i < numberOfAllDices; i++) {
+                for (int j = 0; j < countDices.length; j++) {
+                    if (gameID.equals("All")) {
+                        cursor = db.rawQuery("SELECT COUNT(" + COL_O[i] + ") FROM " + tableName + " WHERE " + COL_O[i] + " == " + (j + 1), null);
+                    } else {
+                        cursor = db.rawQuery("SELECT COUNT(" + COL_O[i] + ") FROM " + tableName + " WHERE " + COL_3 + " == " + gameID + " AND " + COL_O[i] + " == " + (j + 1), null);
+                    }
+
+                    int index = cursor.getColumnIndex("COUNT(" + COL_O[i] + ")");
+
+                    if (cursor.getCount() > 0) {
+                        cursor.moveToFirst();
+                        countDices[j] += cursor.getInt(index);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return countDices;
     }
 
 
+    public int[] sumDices(String nameOfGame, String gameID, boolean isVirtual) {
+        int numberOfAllDices = getNumberOfDices(nameOfGame);
+        db = this.getReadableDatabase();
+        int sumDices[];
+        if (numberOfAllDices == 1) {
+            sumDices = new int[numberOfAllDices * 6];
+        } else {
+            sumDices = new int[numberOfAllDices * 6 - 1];
+        }
+        Cursor cursor;
+        String dices = COL_O[0];
+        String tableName = getTableName(nameOfGame, isVirtual);
+
+        try {
+            for (int i = 1; i < numberOfAllDices; i++) {
+                dices += "+" + COL_O[i];
+            }
+
+            for (int j = 0; j < sumDices.length; j++) {
+                if (gameID.equals("All")) {
+                    cursor = db.rawQuery("SELECT COUNT(" + dices + ") FROM " + tableName + " WHERE " + dices + " == " + (j + numberOfAllDices), null);
+                } else {
+                    cursor = db.rawQuery("SELECT COUNT(" + dices + ") FROM " + tableName + " WHERE " + COL_3 + " == " + gameID + " AND " + dices + " == " + (j + numberOfAllDices), null);
+                }
+
+                int index = cursor.getColumnIndex("COUNT(" + dices + ")");
+
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    sumDices[j] = cursor.getInt(index);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.close();
+        }
+        return sumDices;
+    }
+
+
+    public String getTableName(String nameOfGame, boolean isVirtual) {
+        if (isVirtual) {
+            return nameOfGame + "V";
+        } else {
+            return nameOfGame;
+        }
+    }
 }

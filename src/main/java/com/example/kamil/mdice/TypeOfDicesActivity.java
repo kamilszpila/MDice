@@ -1,5 +1,6 @@
 package com.example.kamil.mdice;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ public class TypeOfDicesActivity extends AppCompatActivity {
     Button normButton;
     Button virtButton;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +35,6 @@ public class TypeOfDicesActivity extends AppCompatActivity {
         Intent intent;
         switch (view.getId()) {
             case R.id.mechButton:
-                intent = new Intent(TypeOfDicesActivity.this, MGameOptionsActivity.class);
-                startActivity(intent);
                 break;
             case R.id.normButton:
                 intent = new Intent(TypeOfDicesActivity.this, NGameOptionsActivity.class);
