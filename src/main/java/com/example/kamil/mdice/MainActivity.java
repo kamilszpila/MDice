@@ -13,6 +13,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button playButton;
     Button loadButton;
     static DataBaseHelper myDb;
     private static final int PERMISSION_WRITE_EXTERNAL_STORAGE = 123;
@@ -25,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        playButton = findViewById(R.id.playButton);
         loadButton = findViewById(R.id.loadButton);
-        loadButton.setEnabled(false);
 
 
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -36,11 +37,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         myDb = new DataBaseHelper(this);
-        myDb.createNameTable();
+        myDb.insertGame("CATAN", 2);
 
 
     }
-
 
     public void click(View view) {
 
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.loadButton:
+                intent = new Intent(MainActivity.this, ResultsActivity.class);
+                startActivity(intent);
                 break;
 
 

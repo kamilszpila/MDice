@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -61,9 +62,9 @@ public class VGameActivity extends AppCompatActivity {
                     diceImages[i].setImageResource(drawables[(values[i] - 1)]);
                 }
 
-                Toast.makeText(this, "Result saved", Toast.LENGTH_SHORT).show();
-
-
+                Toast toast = Toast.makeText(this, "Result saved", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                toast.show();
         }
     }
 

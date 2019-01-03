@@ -22,8 +22,8 @@
     </TableRow>
 
     <TableRow>
-        <ImageView
-            style="@style/DiceImage" />
+
+        <ImageView style="@style/DiceImage" />
 
     </TableRow>
 
@@ -45,7 +45,6 @@
             android:src="@drawable/dice_6" />
 
     </TableRow>
-
 
 
 </TableLayout>

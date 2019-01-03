@@ -21,7 +21,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:stretchColumns="*" >
+            android:stretchColumns="*">
 
             <TableRow android:layout_marginBottom="15dp">
 
@@ -76,7 +76,7 @@
 
             </TableRow>
 
-            <TableRow >
+            <TableRow>
 
                 <TextView
                     android:id="@+id/diceTV4"
@@ -109,25 +109,24 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/discardButton"
                 style="@style/AddDiscardButton"
-                android:src="@drawable/delete"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/delete" />
 
             <ImageButton
                 android:id="@+id/addButton"
                 style="@style/AddDiscardButton"
-                android:src="@drawable/check"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/check" />
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

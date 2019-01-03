@@ -5,7 +5,7 @@
 
     <TextView
         android:id="@+id/lastResultTV"
-        style="@style/LastResultTV"/>
+        style="@style/LastResultTV" />
 
     <ImageView
         android:id="@+id/diceImageS1"
